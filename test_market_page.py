@@ -19,6 +19,10 @@ class GetDefaultPageTests(unittest.TestCase):
         fake_now = datetime(2026, 9, 18, 23, 0, tzinfo=ZoneInfo("America/New_York"))
         self.assertEqual(main.get_default_page_for(fake_now), "Top Daily Gainers")
 
+    def test_app_uses_mobile_viewport_meta(self):
+        self.assertIn('name="viewport"', main.app.index_string)
+        self.assertIn('width=device-width', main.app.index_string)
+
     def test_intraday_sidebar_refresh_clears_cache(self):
         with patch("main.clear_caches") as clear_mock, patch("main.render_sidebar_range", return_value=["updated"]) as render_mock:
             result = main.update_intraday_sidebar("intraday", "TQQQ, UPRO", 3, "TQQQ")

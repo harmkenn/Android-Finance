@@ -41,6 +41,25 @@ def get_default_page() -> str:
 
 
 app = Dash(__name__, title="Market Intelligence")
+app.index_string = """<!DOCTYPE html>
+<html>
+    <head>
+        {%metas%}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+        <title>{%title%}</title>
+        {%favicon%}
+        {%css%}
+    </head>
+    <body>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+    </body>
+</html>
+"""
 server = app.server
 
 
